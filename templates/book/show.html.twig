@@ -1,0 +1,23 @@
+{# templates/book/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ book.title }}</h1>
+    <p>Author: {{ book.author }}</p>
+    <p>Publication Year: {{ book.publicationYear }}</p>
+    <p>Condition: {{ book.condition }}</p>
+    <p>Status: {{ book.isAvailable ? 'Available' : 'Not Available' }}</p>
+    <p>{{ book.summary }}</p>
+
+    {% if is_granted('ROLE_USER') and book.isAvailable %}
+        <form action="{{ path('book_borrow', {'id': book.id}) }}" method="post">
+            <button type="submit" class="btn btn-primary">Borrow this Book</button>
+        </form>
+    {% endif %}
+
+    <h2>Comments</h2>
+    {# Add comment form and display comments here #}
+    
+{% endblock %}

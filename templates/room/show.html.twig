@@ -1,0 +1,26 @@
+{# templates/room/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ room.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ room.name }}</h1>
+    <p>Capacity: {{ room.capacity }}</p>
+    <p>Facilities:</p>
+    <ul>
+        {% if room.hasWifi %}<li>Wi-Fi</li>{% endif %}
+        {% if room.hasProjector %}<li>Projector</li>{% endif %}
+        {% if room.hasWhiteboard %}<li>Whiteboard</li>{% endif %}
+        {% if room.hasPowerOutlets %}<li>Power Outlets</li>{% endif %}
+        {% if room.hasTV %}<li>TV</li>{% endif %}
+        {% if room.hasAirConditioning %}<li>Air Conditioning</li>{% endif %}
+    </ul>
+
+    {% if is_granted('ROLE_USER') %}
+        <h2>Make a Reservation</h2>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Reserve</button>
+        {{ form_end(form) }}
+    {% endif %}
+{% endblock %}

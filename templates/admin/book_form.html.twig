@@ -1,0 +1,12 @@
+{# templates/admin/book_form.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.id ? 'Edit Book' : 'New Book' }}{% endblock %}
+
+{% block body %}
+    <h1>{{ book.id ? 'Edit Book' : 'New Book' }}</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">{{ book.id ? 'Update' : 'Create' }}</button>
+    {{ form_end(form) }}
+{% endblock %}

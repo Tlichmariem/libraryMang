@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{# <h2>{{ 'book.title'|trans }}: {{ book.title }}</h2> #}
+{% block title %}Welcome to Library Management{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Welcome to Library Management</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Browse Books</h5>
+                    <p class="card-text">Explore our collection of books and find your next read.</p>
+                    <a href="{{ path('book_index') }}" class="btn btn-primary">View Books</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Reserve a Room</h5>
+                    <p class="card-text">Book a study room for your next study session or meeting.</p>
+                    <a href="{{ path('room_index') }}" class="btn btn-primary">View Rooms</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

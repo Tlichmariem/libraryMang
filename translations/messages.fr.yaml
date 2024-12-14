@@ -1,0 +1,5 @@
+book:
+    title: Title
+    author: Author
+    available: Available
+    not_available: Not Available

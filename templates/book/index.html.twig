@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{# <h2>{{ 'book.title'|trans }}: {{ book.title }}</h2> #}
+{% block title %}Book Catalog{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Book Catalog</h1>
+    <div class="row">
+        {% for book in books %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ book.image }}" class="card-img-top" alt="{{ book.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text">By {{ book.author }}</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                Status: {{ book.isAvailable ? 'Available' : 'Not Available' }}
+                            </small>
+                        </p>
+                        <a href="{{ path('book_show', {'id': book.id}) }}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

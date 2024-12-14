@@ -1,0 +1,32 @@
+{# templates/admin/users_index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}User Management{% endblock %}
+
+{% block body %}
+    <h1>User Management</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles|join(', ') }}</td>
+                <td>
+                    <form action="{{ path('admin_toggle_user_ban', {'id': user.id}) }}" method="post">
+                        <button type="submit" class="btn btn-warning">
+                            {{ user.isBanned ? 'Unban' : 'Ban' }}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
