@@ -1,5 +1,5 @@
 <?php
-
+// src/Entity/User.php
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -69,7 +69,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -91,7 +90,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+        // garantie que chaque utilisateur a au moins ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -103,7 +102,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
-
         return $this;
     }
 
@@ -118,7 +116,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -127,7 +124,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
+        // Si vous stockez des données temporaires sensibles sur l'utilisateur, supprimez-les ici
         // $this->plainPassword = null;
     }
 
@@ -145,19 +142,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->startTime->add($startTime);
             $startTime->setUser($this);
         }
-
         return $this;
     }
 
     public function removeStartTime(RoomReservation $startTime): static
     {
         if ($this->startTime->removeElement($startTime)) {
-            // set the owning side to null (unless already changed)
             if ($startTime->getUser() === $this) {
                 $startTime->setUser(null);
             }
         }
-
         return $this;
     }
 
@@ -175,19 +169,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->comments->add($comment);
             $comment->setAuthor($this);
         }
-
         return $this;
     }
 
     public function removeComment(Comment $comment): static
     {
         if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
             if ($comment->getAuthor() === $this) {
                 $comment->setAuthor(null);
             }
         }
-
         return $this;
     }
 
@@ -199,7 +190,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
-
         return $this;
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\RoomRepository;
@@ -38,7 +37,6 @@ class Room
     public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -50,7 +48,6 @@ class Room
     public function setCapacity(int $capacity): static
     {
         $this->capacity = $capacity;
-
         return $this;
     }
 
@@ -62,7 +59,6 @@ class Room
     public function setLocation(string $location): static
     {
         $this->location = $location;
-
         return $this;
     }
 
@@ -74,7 +70,6 @@ class Room
     public function setType(string $type): static
     {
         $this->type = $type;
-
         return $this;
     }
 }

@@ -19,7 +19,8 @@ final class Version20241213180208 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
+        
+        // Les autres instructions de création de table
         $this->addSql('CREATE TABLE book (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, author VARCHAR(255) NOT NULL, publication_date DATE NOT NULL, availibility VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE book_loan (id INT AUTO_INCREMENT NOT NULL, book_id INT DEFAULT NULL, user_id INT DEFAULT NULL, borrow_date DATETIME NOT NULL, return_date DATETIME NOT NULL, status VARCHAR(255) NOT NULL, INDEX IDX_DC4E460B16A2B381 (book_id), INDEX IDX_DC4E460BA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE comment (id INT AUTO_INCREMENT NOT NULL, author_id INT DEFAULT NULL, content VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, INDEX IDX_9474526CF675F31B (author_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -32,7 +33,12 @@ final class Version20241213180208 extends AbstractMigration
         $this->addSql('ALTER TABLE book_loan ADD CONSTRAINT FK_DC4E460BA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526CF675F31B FOREIGN KEY (author_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE room_reservation ADD CONSTRAINT FK_56FDE76AA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
+     // Insertion de données dans la table 'book'
+     $this->addSql("INSERT INTO book (title, author, publication_date, availability) VALUES 
+     ('The Great Gatsby', 'F. Scott Fitzgerald', '1925-04-10', 1), 
+     ('1984', 'George Orwell', '1949-06-08', 1)");
     }
+    
 
     public function down(Schema $schema): void
     {
@@ -49,5 +55,10 @@ final class Version20241213180208 extends AbstractMigration
         $this->addSql('DROP TABLE subscription');
         $this->addSql('DROP TABLE user');
         $this->addSql('DROP TABLE messenger_messages');
+        // Supprimer les livres insérés en cas de rollback
+        $this->addSql("DELETE FROM book WHERE title IN ('The Great Gatsby', '1984')");
+
+
     }
+    
 }

@@ -1,0 +1,19 @@
+{# templates/user/profile.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block body %}
+    <h1>{{ app.user.username }}'s Profile</h1>
+
+    <p>Email: {{ app.user.email }}</p>
+    <p>Roles:</p>
+    <ul>
+        {% for role in app.user.roles %}
+            <li>{{ role }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_logout') }}" class="btn btn-primary">Logout</a>
+{% endblock %}
